@@ -6,9 +6,6 @@ public class Rover {
 
     private Direction direction;
 
-    public Rover() {
-    }
-
     public Rover(Point initialPosition, Direction initialDirection) {
         position = initialPosition;
         direction = initialDirection;

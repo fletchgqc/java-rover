@@ -12,4 +12,17 @@ public class RoverTest {
         assertThat("hello", is("hello"));
     }
 
+    @Test
+    public void createRoverArgumentConstructorSetsInitialPosition() {
+        Rover rover = new Rover(new Point(3, 4), Direction.S);
+
+        assertThat(rover.getPosition().getX(), is(3));
+    }
+
+    @Test
+    public void createRoverArgumentConstructorSetsInitialDirection() {
+        Rover rover = new Rover(new Point(3, 4), Direction.S);
+
+        assertThat(rover.getDirection(), is(Direction.S));
+    }
 }

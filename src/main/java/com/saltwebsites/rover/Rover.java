@@ -10,6 +10,8 @@ public class Rover {
     }
 
     public Rover(Point initialPosition, Direction initialDirection) {
+        position = initialPosition;
+        direction = initialDirection;
     }
 
     public Direction getDirection() {

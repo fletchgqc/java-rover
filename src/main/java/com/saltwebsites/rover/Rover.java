@@ -11,6 +11,22 @@ public class Rover {
         direction = initialDirection;
     }
 
+    public void moveForward() {
+
+    }
+
+    public void moveBackward() {
+
+    }
+
+    public void turnLeft() {
+
+    }
+
+    public void turnRight() {
+
+    }
+
     public Direction getDirection() {
         return direction;
     }

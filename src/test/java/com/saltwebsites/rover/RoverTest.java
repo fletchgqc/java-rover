@@ -20,4 +20,36 @@ public class RoverTest {
 
         assertThat(rover.getDirection(), is(Direction.S));
     }
+
+    @Test
+    public void moveForward() {
+        Rover rover = new Rover(new Point(2, 2), Direction.N);
+        rover.moveForward();
+
+        assertThat(rover.getPosition().getY(), is(3));
+    }
+
+    @Test
+    public void moveBackward() {
+        Rover rover = new Rover(new Point(2, 2), Direction.N);
+        rover.moveBackward();
+
+        assertThat(rover.getPosition().getY(), is(1));
+    }
+
+    @Test
+    public void turnLeft() {
+        Rover rover = new Rover(new Point(2, 2), Direction.N);
+        rover.turnLeft();
+
+        assertThat(rover.getDirection(), is(Direction.W));
+    }
+
+    @Test
+    public void turnRight() {
+        Rover rover = new Rover(new Point(2, 2), Direction.N);
+        rover.turnRight();
+
+        assertThat(rover.getDirection(), is(Direction.E));
+    }
 }

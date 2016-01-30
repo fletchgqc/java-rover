@@ -5,6 +5,9 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
+/**
+ * Test data assumes minimum grid height and width of 4
+ */
 public class RoverTest {
 
     @Test
@@ -27,6 +30,43 @@ public class RoverTest {
         rover.moveForward();
 
         assertThat(rover.getPosition().getY(), is(3));
+    }
+
+    @Test
+    public void moveForwardOverGridXBoundary() {
+        Rover rover = new Rover(new Point(Grid.width - 1, 2), Direction.E);
+        rover.moveForward();
+
+        assertThat(rover.getPosition().getX(), is(0));
+        assertThat(rover.getDirection(), is(Direction.E));
+    }
+
+    @Test
+    public void moveForwardOverNorthPole() {
+        int xStartPosition = 2;
+        Rover rover = new Rover(new Point(xStartPosition, Grid.height - 1), Direction.N);
+        rover.moveForward();
+
+        assertThat(rover.getPosition().getY(), is(Grid.height - 1));
+
+        int correctXFinishPosition = (xStartPosition + (Grid.width / 2)) % Grid.width;
+
+        assertThat(rover.getPosition().getX(), is(correctXFinishPosition));
+        assertThat(rover.getDirection(), is(Direction.S));
+    }
+
+    @Test
+    public void moveBackwardOverSouthPole() {
+        int xStartPosition = 2;
+        Rover rover = new Rover(new Point(xStartPosition, 0), Direction.N);
+        rover.moveBackward();
+
+        assertThat(rover.getPosition().getY(), is(0));
+
+        int correctXFinishPosition = (xStartPosition + (Grid.width / 2)) % Grid.width;
+
+        assertThat(rover.getPosition().getX(), is(correctXFinishPosition));
+        assertThat(rover.getDirection(), is(Direction.S));
     }
 
     @Test

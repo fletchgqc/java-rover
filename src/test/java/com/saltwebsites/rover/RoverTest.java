@@ -8,11 +8,6 @@ import org.junit.Test;
 public class RoverTest {
 
     @Test
-    public void testOk() {
-        assertThat("hello", is("hello"));
-    }
-
-    @Test
     public void createRoverArgumentConstructorSetsInitialPosition() {
         Rover rover = new Rover(new Point(3, 4), Direction.S);
 

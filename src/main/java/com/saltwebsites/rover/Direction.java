@@ -4,8 +4,6 @@ public enum Direction {
 
     N(0, 0, 1), E(1, 1, 0), S(2, 0, -1), W(3, -1, 0);
 
-    public static int maxOrder = 3;
-
     private int order;
 
     private int xIncreaseOfForwardMovement;

@@ -46,10 +46,26 @@ public class RoverTest {
     }
 
     @Test
+    public void turnLeftToWest() {
+        Rover rover = new Rover(new Point(2, 2), Direction.N);
+        rover.turnLeft();
+
+        assertThat(rover.getDirection(), is(Direction.W));
+    }
+
+    @Test
     public void turnRight() {
         Rover rover = new Rover(new Point(2, 2), Direction.N);
         rover.turnRight();
 
         assertThat(rover.getDirection(), is(Direction.E));
+    }
+
+    @Test
+    public void turnRightToNorth() {
+        Rover rover = new Rover(new Point(2, 2), Direction.W);
+        rover.turnRight();
+
+        assertThat(rover.getDirection(), is(Direction.N));
     }
 }

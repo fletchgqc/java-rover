@@ -20,11 +20,16 @@ public class Rover {
     }
 
     public void turnLeft() {
-
+        int newDirectionOrder = direction.getOrder() - 1;
+        int newDirectionOrderAdjustedForEdgeValue = (newDirectionOrder + Direction.maxOrder + 1)
+                % (Direction.maxOrder + 1);
+        direction = Direction.fromOrder(newDirectionOrderAdjustedForEdgeValue);
     }
 
     public void turnRight() {
-
+        int newDirectionOrder = direction.getOrder() + 1;
+        int newDirectionOrderAdjustedForEdgeValue = newDirectionOrder % (Direction.maxOrder + 1);
+        direction = Direction.fromOrder(newDirectionOrderAdjustedForEdgeValue);
     }
 
     public Direction getDirection() {

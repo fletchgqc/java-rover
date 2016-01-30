@@ -12,11 +12,13 @@ public class Rover {
     }
 
     public void moveForward() {
-
+        position.setX(position.getX() + direction.getXIncreaseOfForwardMovement());
+        position.setY(position.getY() + direction.getYIncreaseOfForwardMovement());
     }
 
     public void moveBackward() {
-
+        position.setX(position.getX() - direction.getXIncreaseOfForwardMovement());
+        position.setY(position.getY() - direction.getYIncreaseOfForwardMovement());
     }
 
     public void turnLeft() {

@@ -31,11 +31,11 @@ public enum Direction {
         return order;
     }
 
-    public int getxIncreaseOfForwardMovement() {
+    public int getXIncreaseOfForwardMovement() {
         return xIncreaseOfForwardMovement;
     }
 
-    public int getyIncreaseOfForwardMovement() {
+    public int getYIncreaseOfForwardMovement() {
         return yIncreaseOfForwardMovement;
     }
 }

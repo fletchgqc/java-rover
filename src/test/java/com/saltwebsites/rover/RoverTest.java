@@ -140,8 +140,8 @@ public class RoverTest {
         Rover rover = new Rover(new Point(2, 2), Direction.W);
         rover.executeConsecutiveCommands(FORWARD_COMMAND + LEFT_TURN_COMMAND + BACKWARD_COMMAND + BACKWARD_COMMAND);
 
-        assertThat(rover.getPosition().getX(), is(4));
-        assertThat(rover.getPosition().getX(), is(3));
-        assertThat(rover.getDirection(), is(Direction.W));
+        assertThat(rover.getPosition().getX(), is(1));
+        assertThat(rover.getPosition().getY(), is(4));
+        assertThat(rover.getDirection(), is(Direction.S));
     }
 }

@@ -1,5 +1,18 @@
 package com.saltwebsites.rover;
 
+/**
+ * Controls a vehicle driving around a grid on a spherical planet. The vehicle must be created with an initial position
+ * on the grid and direction, then it can be manoeuvred by issuing command strings.
+ * 
+ * <p>
+ * The grid is similar to latitude/longitude on Earth. It is assumed that the rover implements Mercator projection to
+ * map this grid onto the spherical planet.
+ * 
+ * <p>
+ * While all longitude (Y) lines cross the poles, no grid point is exactly on the tip of the true North or South pole,
+ * as that would require some special edge case handling for turning the rover on that point which I choose not to
+ * implement.
+ */
 public class Rover {
 
     private Point position;

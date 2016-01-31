@@ -11,16 +11,17 @@ import org.junit.experimental.categories.Categories.ExcludeCategory;
  */
 public class RoverTest {
 
-    private final static char FORWARD_COMMAND = 'F';
-    private final static char BACKWARD_COMMAND = 'B';
-    private final static char LEFT_TURN_COMMAND = 'L';
-    private final static char RIGHT_TURN_COMMAND = 'R';
+    private final static String FORWARD_COMMAND = "F";
+    private final static String BACKWARD_COMMAND = "B";
+    private final static String LEFT_TURN_COMMAND = "L";
+    private final static String RIGHT_TURN_COMMAND = "R";
 
     @Test
     public void createRoverArgumentConstructorSetsInitialPosition() {
         Rover rover = new Rover(new Point(3, 4), Direction.S);
 
         assertThat(rover.getPosition().getX(), is(3));
+        assertThat(rover.getPosition().getY(), is(4));
     }
 
     @Test
@@ -32,13 +33,13 @@ public class RoverTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void createRoverOutsideGridThrowsException() {
-        Rover rover = new Rover(new Point(3, Grid.height + 3), Direction.S);
+        new Rover(new Point(3, Grid.height + 3), Direction.S);
     }
 
     @Test
     public void moveForward() {
         Rover rover = new Rover(new Point(2, 2), Direction.N);
-        rover.executeCommand(FORWARD_COMMAND);
+        rover.executeConsecutiveCommands(FORWARD_COMMAND);
 
         assertThat(rover.getPosition().getY(), is(3));
     }
@@ -46,7 +47,7 @@ public class RoverTest {
     @Test
     public void moveForwardOverGridXBoundary() {
         Rover rover = new Rover(new Point(Grid.width - 1, 2), Direction.E);
-        rover.executeCommand(FORWARD_COMMAND);
+        rover.executeConsecutiveCommands(FORWARD_COMMAND);
 
         assertThat(rover.getPosition().getX(), is(0));
         assertThat(rover.getDirection(), is(Direction.E));
@@ -56,7 +57,7 @@ public class RoverTest {
     public void moveForwardOverNorthPole() {
         int xStartPosition = 2;
         Rover rover = new Rover(new Point(xStartPosition, Grid.height - 1), Direction.N);
-        rover.executeCommand(FORWARD_COMMAND);
+        rover.executeConsecutiveCommands(FORWARD_COMMAND);
 
         assertThat(rover.getPosition().getY(), is(Grid.height - 1));
 
@@ -70,7 +71,7 @@ public class RoverTest {
     public void moveBackwardOverSouthPole() {
         int xStartPosition = 2;
         Rover rover = new Rover(new Point(xStartPosition, 0), Direction.N);
-        rover.executeCommand(BACKWARD_COMMAND);
+        rover.executeConsecutiveCommands(BACKWARD_COMMAND);
 
         assertThat(rover.getPosition().getY(), is(0));
 
@@ -83,7 +84,7 @@ public class RoverTest {
     @Test
     public void moveBackward() {
         Rover rover = new Rover(new Point(2, 2), Direction.N);
-        rover.executeCommand(BACKWARD_COMMAND);
+        rover.executeConsecutiveCommands(BACKWARD_COMMAND);
 
         assertThat(rover.getPosition().getY(), is(1));
     }
@@ -91,7 +92,7 @@ public class RoverTest {
     @Test
     public void turnLeft() {
         Rover rover = new Rover(new Point(2, 2), Direction.N);
-        rover.executeCommand(LEFT_TURN_COMMAND);
+        rover.executeConsecutiveCommands(LEFT_TURN_COMMAND);
 
         assertThat(rover.getDirection(), is(Direction.W));
     }
@@ -99,7 +100,7 @@ public class RoverTest {
     @Test
     public void turnLeftToWest() {
         Rover rover = new Rover(new Point(2, 2), Direction.N);
-        rover.executeCommand(LEFT_TURN_COMMAND);
+        rover.executeConsecutiveCommands(LEFT_TURN_COMMAND);
 
         assertThat(rover.getDirection(), is(Direction.W));
     }
@@ -107,7 +108,7 @@ public class RoverTest {
     @Test
     public void turnRight() {
         Rover rover = new Rover(new Point(2, 2), Direction.N);
-        rover.executeCommand(RIGHT_TURN_COMMAND);
+        rover.executeConsecutiveCommands(RIGHT_TURN_COMMAND);
 
         assertThat(rover.getDirection(), is(Direction.E));
     }
@@ -115,7 +116,7 @@ public class RoverTest {
     @Test
     public void turnRightToNorth() {
         Rover rover = new Rover(new Point(2, 2), Direction.W);
-        rover.executeCommand(RIGHT_TURN_COMMAND);
+        rover.executeConsecutiveCommands(RIGHT_TURN_COMMAND);
 
         assertThat(rover.getDirection(), is(Direction.N));
     }

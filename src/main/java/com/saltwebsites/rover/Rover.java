@@ -47,14 +47,17 @@ public class Rover {
         switch (Character.toUpperCase(command)) {
         case FORWARD_COMMAND:
             moveForward();
+            break;
         case BACKWARD_COMMAND:
             moveBackward();
+            break;
         case LEFT_TURN_COMMAND:
             turnLeft();
+            break;
         case RIGHT_TURN_COMMAND:
             turnRight();
+            break;
         default:
-            throw new IllegalArgumentException("Command '" + command + "' is not valid.");
         }
     }
 

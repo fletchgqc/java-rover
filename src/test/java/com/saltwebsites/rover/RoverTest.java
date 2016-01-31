@@ -4,7 +4,6 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
-import org.junit.experimental.categories.Categories.ExcludeCategory;
 
 /**
  * Test data assumes minimum grid height and width of 4
@@ -15,6 +14,9 @@ public class RoverTest {
     private final static String BACKWARD_COMMAND = "B";
     private final static String LEFT_TURN_COMMAND = "L";
     private final static String RIGHT_TURN_COMMAND = "R";
+
+    private final static String LOWER_CASE_FORWARD_COMMAND = "f";
+    private static final String INVALID_COMMAND = "j";
 
     @Test
     public void createRoverArgumentConstructorSetsInitialPosition() {
@@ -119,5 +121,27 @@ public class RoverTest {
         rover.executeConsecutiveCommands(RIGHT_TURN_COMMAND);
 
         assertThat(rover.getDirection(), is(Direction.N));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void sendInvalidCommand() {
+        Rover rover = new Rover(new Point(2, 2), Direction.W);
+        rover.executeConsecutiveCommands(FORWARD_COMMAND + INVALID_COMMAND);
+    }
+
+    @Test
+    public void sendLowerCaseCommand() {
+        Rover rover = new Rover(new Point(2, 2), Direction.W);
+        rover.executeConsecutiveCommands(LOWER_CASE_FORWARD_COMMAND);
+    }
+
+    @Test
+    public void sendCommandString() {
+        Rover rover = new Rover(new Point(2, 2), Direction.W);
+        rover.executeConsecutiveCommands(FORWARD_COMMAND + LEFT_TURN_COMMAND + BACKWARD_COMMAND + BACKWARD_COMMAND);
+
+        assertThat(rover.getPosition().getX(), is(4));
+        assertThat(rover.getPosition().getX(), is(3));
+        assertThat(rover.getDirection(), is(Direction.W));
     }
 }

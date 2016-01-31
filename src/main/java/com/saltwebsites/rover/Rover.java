@@ -62,6 +62,7 @@ public class Rover {
             turnRight();
             break;
         default:
+            throw new IllegalArgumentException("Command '" + command + "' is invalid.");
         }
     }
 

@@ -40,7 +40,7 @@ public class RoverTest {
     @Test
     public void moveForwardOverGridXBoundary() {
         Rover rover = new Rover(new Point(Grid.width - 1, 2), Direction.E);
-        rover.moveForward();
+        rover.executeCommand(FORWARD_COMMAND);
 
         assertThat(rover.getPosition().getX(), is(0));
         assertThat(rover.getDirection(), is(Direction.E));
@@ -50,7 +50,7 @@ public class RoverTest {
     public void moveForwardOverNorthPole() {
         int xStartPosition = 2;
         Rover rover = new Rover(new Point(xStartPosition, Grid.height - 1), Direction.N);
-        rover.moveForward();
+        rover.executeCommand(FORWARD_COMMAND);
 
         assertThat(rover.getPosition().getY(), is(Grid.height - 1));
 
@@ -64,7 +64,7 @@ public class RoverTest {
     public void moveBackwardOverSouthPole() {
         int xStartPosition = 2;
         Rover rover = new Rover(new Point(xStartPosition, 0), Direction.N);
-        rover.moveBackward();
+        rover.executeCommand(BACKWARD_COMMAND);
 
         assertThat(rover.getPosition().getY(), is(0));
 
@@ -77,7 +77,7 @@ public class RoverTest {
     @Test
     public void moveBackward() {
         Rover rover = new Rover(new Point(2, 2), Direction.N);
-        rover.moveBackward();
+        rover.executeCommand(BACKWARD_COMMAND);
 
         assertThat(rover.getPosition().getY(), is(1));
     }
@@ -85,7 +85,7 @@ public class RoverTest {
     @Test
     public void turnLeft() {
         Rover rover = new Rover(new Point(2, 2), Direction.N);
-        rover.turnLeft();
+        rover.executeCommand(LEFT_TURN_COMMAND);
 
         assertThat(rover.getDirection(), is(Direction.W));
     }
@@ -93,7 +93,7 @@ public class RoverTest {
     @Test
     public void turnLeftToWest() {
         Rover rover = new Rover(new Point(2, 2), Direction.N);
-        rover.turnLeft();
+        rover.executeCommand(LEFT_TURN_COMMAND);
 
         assertThat(rover.getDirection(), is(Direction.W));
     }
@@ -101,7 +101,7 @@ public class RoverTest {
     @Test
     public void turnRight() {
         Rover rover = new Rover(new Point(2, 2), Direction.N);
-        rover.turnRight();
+        rover.executeCommand(RIGHT_TURN_COMMAND);
 
         assertThat(rover.getDirection(), is(Direction.E));
     }
@@ -109,7 +109,7 @@ public class RoverTest {
     @Test
     public void turnRightToNorth() {
         Rover rover = new Rover(new Point(2, 2), Direction.W);
-        rover.turnRight();
+        rover.executeCommand(RIGHT_TURN_COMMAND);
 
         assertThat(rover.getDirection(), is(Direction.N));
     }

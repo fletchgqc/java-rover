@@ -1,5 +1,8 @@
 package com.saltwebsites.rover;
 
+/**
+ * Holds constants related to an X-Y Grid.
+ */
 public class Grid {
 
     /**

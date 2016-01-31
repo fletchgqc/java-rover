@@ -1,5 +1,8 @@
 package com.saltwebsites.rover;
 
+/**
+ * An intersection of X and Y lines on a grid.
+ */
 public class Point {
 
     private int x;

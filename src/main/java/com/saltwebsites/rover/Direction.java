@@ -1,5 +1,8 @@
 package com.saltwebsites.rover;
 
+/**
+ * A direction which can be faced while navigating a grid.
+ */
 public enum Direction {
 
     N(0, 0, 1), E(1, 1, 0), S(2, 0, -1), W(3, -1, 0);
@@ -25,14 +28,23 @@ public enum Direction {
         throw new IllegalArgumentException(String.valueOf(order) + " is not a valid value of order");
     }
 
+    /**
+     * This Direction's order on the compass, starting with 0 at North and counting clockwise.
+     */
     public int getOrder() {
         return order;
     }
 
+    /**
+     * How much moving in this direction would increase one's position on the X-plane of the grid.
+     */
     public int getXIncreaseOfForwardMovement() {
         return xIncreaseOfForwardMovement;
     }
 
+    /**
+     * How much moving in this direction would increase one's position on the Y-plane of the grid.
+     */
     public int getYIncreaseOfForwardMovement() {
         return yIncreaseOfForwardMovement;
     }

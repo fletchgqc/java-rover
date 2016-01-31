@@ -10,6 +10,11 @@ import org.junit.Test;
  */
 public class RoverTest {
 
+    private static char FORWARD_COMMAND = 'F';
+    private static char BACKWARD_COMMAND = 'B';
+    private static char LEFT_TURN_COMMAND = 'L';
+    private static char RIGHT_TURN_COMMAND = 'R';
+
     @Test
     public void createRoverArgumentConstructorSetsInitialPosition() {
         Rover rover = new Rover(new Point(3, 4), Direction.S);
@@ -27,7 +32,7 @@ public class RoverTest {
     @Test
     public void moveForward() {
         Rover rover = new Rover(new Point(2, 2), Direction.N);
-        rover.moveForward();
+        rover.executeCommand(FORWARD_COMMAND);
 
         assertThat(rover.getPosition().getY(), is(3));
     }

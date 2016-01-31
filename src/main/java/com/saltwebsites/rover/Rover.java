@@ -11,6 +11,15 @@ public class Rover {
         direction = initialDirection;
     }
 
+    public void executeConsecutiveCommands(String commands) {
+        for (char command : commands.toCharArray()) {
+            executeCommand(command);
+        }
+    }
+
+    public void executeCommand(char command) {
+    }
+
     /**
      * Returns a value equivalent to the given value mapped onto X's permitted domain
      */
@@ -34,24 +43,24 @@ public class Rover {
         }
     }
 
-    public void moveForward() {
+    private void moveForward() {
         position.setX(normaliseForGridXWrapping(position.getX() + direction.getXIncreaseOfForwardMovement()));
         normaliseForGridYWrapping(position.getY() + direction.getYIncreaseOfForwardMovement());
     }
 
-    public void moveBackward() {
+    private void moveBackward() {
         position.setX(normaliseForGridXWrapping(position.getX() - direction.getXIncreaseOfForwardMovement()));
         normaliseForGridYWrapping(position.getY() - direction.getYIncreaseOfForwardMovement());
     }
 
-    public void turnLeft() {
+    private void turnLeft() {
         int newDirectionOrder = direction.getOrder() - 1;
         int newDirectionOrderAdjustedForEdgeValue = (newDirectionOrder + Direction.values().length)
                 % (Direction.values().length);
         direction = Direction.fromOrder(newDirectionOrderAdjustedForEdgeValue);
     }
 
-    public void turnRight() {
+    private void turnRight() {
         int newDirectionOrder = direction.getOrder() + 1;
         int newDirectionOrderAdjustedForEdgeValue = newDirectionOrder % (Direction.values().length);
         direction = Direction.fromOrder(newDirectionOrderAdjustedForEdgeValue);
@@ -61,15 +70,7 @@ public class Rover {
         return direction;
     }
 
-    public void setDirection(Direction direction) {
-        this.direction = direction;
-    }
-
     public Point getPosition() {
         return position;
-    }
-
-    public void setPosition(Point position) {
-        this.position = position;
     }
 }

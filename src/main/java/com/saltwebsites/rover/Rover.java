@@ -80,49 +80,58 @@ public class Rover {
     }
 
     /**
-     * Returns a value equivalent to the given value mapped onto X's permitted domain
+     * Maps a given value onto the range 0 - maxValue, by wrapping values outside this range.
+     * 
+     * @return the value which is equivalent to the given value, but inside the permitted range.
+     */
+    private int mapValueOntoRange(int value, int maxValue) {
+        return (maxValue + value) % maxValue;
+    }
+
+    /**
+     * Returns a value equivalent to the given value mapped onto X's permitted domain by wrapping.
      */
     private int normaliseForGridXWrapping(int xValue) {
-        return (Grid.width + xValue) % Grid.width;
+        return mapValueOntoRange(xValue, Grid.width);
     }
 
     /**
      * Returns a value equivalent to the given value mapped onto Y's permitted range
      */
-    private void normaliseForGridYWrapping(int yValue) {
+    private void setYPosition(int yValue) {
         if (yValue == -1 || yValue == Grid.height) {
-            /*
-             * Rover moved over a pole. It now should be on the same Y-latitude as before, but facing the opposite
-             * direction and on the opposite X-longitude.
-             */
-            position.setX(normaliseForGridXWrapping(position.getX() + Grid.width / 2));
-            direction = Direction.fromOrder(direction.getOrder() + Direction.values().length / 2);
+            adjustRoverForYWrapping();
         } else {
             position.setY(yValue);
         }
     }
 
+    /**
+     * Rover moved over a pole. It now should be on the same Y-latitude as before, but facing the opposite direction and
+     * on the opposite X-longitude.
+     */
+    private void adjustRoverForYWrapping() {
+        position.setX(normaliseForGridXWrapping(position.getX() + Grid.width / 2));
+        direction = Direction.fromOrder(
+                mapValueOntoRange(direction.getOrder() + Direction.values().length / 2, Direction.values().length));
+    }
+
     private void moveForward() {
         position.setX(normaliseForGridXWrapping(position.getX() + direction.getXIncreaseOfForwardMovement()));
-        normaliseForGridYWrapping(position.getY() + direction.getYIncreaseOfForwardMovement());
+        setYPosition(position.getY() + direction.getYIncreaseOfForwardMovement());
     }
 
     private void moveBackward() {
         position.setX(normaliseForGridXWrapping(position.getX() - direction.getXIncreaseOfForwardMovement()));
-        normaliseForGridYWrapping(position.getY() - direction.getYIncreaseOfForwardMovement());
+        setYPosition(position.getY() - direction.getYIncreaseOfForwardMovement());
     }
 
     private void turnLeft() {
-        int newDirectionOrder = direction.getOrder() - 1;
-        int newDirectionOrderAdjustedForEdgeValue = (newDirectionOrder + Direction.values().length)
-                % (Direction.values().length);
-        direction = Direction.fromOrder(newDirectionOrderAdjustedForEdgeValue);
+        direction = Direction.fromOrder(mapValueOntoRange(direction.getOrder() - 1, Direction.values().length));
     }
 
     private void turnRight() {
-        int newDirectionOrder = direction.getOrder() + 1;
-        int newDirectionOrderAdjustedForEdgeValue = newDirectionOrder % (Direction.values().length);
-        direction = Direction.fromOrder(newDirectionOrderAdjustedForEdgeValue);
+        direction = Direction.fromOrder(mapValueOntoRange(direction.getOrder() + 1, Direction.values().length));
     }
 
     public Direction getDirection() {

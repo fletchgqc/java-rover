@@ -18,6 +18,10 @@ public class Rover {
      *             if the initialPosition is not within the bounds of the grid.
      */
     public Rover(Point initialPosition, Direction initialDirection) {
+        if (initialPosition.getX() > Grid.width || initialPosition.getY() > Grid.height) {
+            throw new IllegalArgumentException("Initial position would not be within grid bounds");
+        }
+
         position = initialPosition;
         direction = initialDirection;
     }

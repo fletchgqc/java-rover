@@ -12,14 +12,14 @@ public class Rover {
     }
 
     /**
-     * Returns a value equivalent to the given value mapped onto X's permitted domain values
+     * Returns a value equivalent to the given value mapped onto X's permitted domain
      */
     private int normaliseForGridXWrapping(int xValue) {
         return (Grid.width + xValue) % Grid.width;
     }
 
     /**
-     * Returns a value equivalent to the given value mapped onto X's permitted domain values
+     * Returns a value equivalent to the given value mapped onto Y's permitted range
      */
     private void normaliseForGridYWrapping(int yValue) {
         if (yValue == -1 || yValue == Grid.height) {
@@ -41,7 +41,7 @@ public class Rover {
 
     public void moveBackward() {
         position.setX(normaliseForGridXWrapping(position.getX() - direction.getXIncreaseOfForwardMovement()));
-        position.setY(position.getY() - direction.getYIncreaseOfForwardMovement());
+        normaliseForGridYWrapping(position.getY() - direction.getYIncreaseOfForwardMovement());
     }
 
     public void turnLeft() {

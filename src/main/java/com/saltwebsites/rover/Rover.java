@@ -6,18 +6,56 @@ public class Rover {
 
     private Direction direction;
 
+    private final static char FORWARD_COMMAND = 'F';
+    private final static char BACKWARD_COMMAND = 'B';
+    private final static char LEFT_TURN_COMMAND = 'L';
+    private final static char RIGHT_TURN_COMMAND = 'R';
+
+    /**
+     * Creates a rover with an initial position on the grid and facing an initial direction.
+     * 
+     * @throws IllegalArgumentException
+     *             if the initialPosition is not within the bounds of the grid.
+     */
     public Rover(Point initialPosition, Direction initialDirection) {
         position = initialPosition;
         direction = initialDirection;
     }
 
+    /**
+     * Executes each command in the String in order, with no pause between commands. Valid commands are:
+     * <ul>
+     * <li>F - Moves rover forward one point on the grid.
+     * <li>B - Move rover backward one point on the grid.
+     * <li>L - Turn rover 90 degrees to the left.
+     * <li>R - Turn rover 90 degrees to the right.
+     * </ul>
+     * 
+     * @param commands
+     *            A case-insensitive String of commands without any separator.
+     * @exception IllegalArgumentException
+     *                if a character in the String is not in the list of valid commands. However, all commands before
+     *                the illegal character will be executed.
+     */
     public void executeConsecutiveCommands(String commands) {
         for (char command : commands.toCharArray()) {
             executeCommand(command);
         }
     }
 
-    public void executeCommand(char command) {
+    private void executeCommand(char command) {
+        switch (Character.toUpperCase(command)) {
+        case FORWARD_COMMAND:
+            moveForward();
+        case BACKWARD_COMMAND:
+            moveBackward();
+        case LEFT_TURN_COMMAND:
+            turnLeft();
+        case RIGHT_TURN_COMMAND:
+            turnRight();
+        default:
+            throw new IllegalArgumentException("Command '" + command + "' is not valid.");
+        }
     }
 
     /**

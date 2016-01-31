@@ -4,16 +4,17 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
+import org.junit.experimental.categories.Categories.ExcludeCategory;
 
 /**
  * Test data assumes minimum grid height and width of 4
  */
 public class RoverTest {
 
-    private static char FORWARD_COMMAND = 'F';
-    private static char BACKWARD_COMMAND = 'B';
-    private static char LEFT_TURN_COMMAND = 'L';
-    private static char RIGHT_TURN_COMMAND = 'R';
+    private final static char FORWARD_COMMAND = 'F';
+    private final static char BACKWARD_COMMAND = 'B';
+    private final static char LEFT_TURN_COMMAND = 'L';
+    private final static char RIGHT_TURN_COMMAND = 'R';
 
     @Test
     public void createRoverArgumentConstructorSetsInitialPosition() {
@@ -27,6 +28,11 @@ public class RoverTest {
         Rover rover = new Rover(new Point(3, 4), Direction.S);
 
         assertThat(rover.getDirection(), is(Direction.S));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void createRoverOutsideGridThrowsException() {
+        Rover rover = new Rover(new Point(3, Grid.height + 3), Direction.S);
     }
 
     @Test

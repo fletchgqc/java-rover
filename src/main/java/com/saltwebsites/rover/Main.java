@@ -8,7 +8,7 @@ public class Main {
      * Rover.
      */
     public static void main(String[] args) {
-        new Rover(new Point(0, 0), Direction.N);
+        new Rover(new Position(0, 0), Direction.N);
     }
 
 }

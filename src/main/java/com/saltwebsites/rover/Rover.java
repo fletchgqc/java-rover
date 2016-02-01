@@ -6,7 +6,7 @@ package com.saltwebsites.rover;
  * 
  * <p>
  * The grid is similar to latitude/longitude on Earth. It is assumed that the rover implements Mercator projection to
- * map this grid onto the spherical planet.
+ * map this grid onto the spherical planet in order to implement the actual movement.
  * 
  * <p>
  * While all longitude (Y) lines cross the poles, no grid point is exactly on the tip of the true North or South pole,
@@ -15,7 +15,7 @@ package com.saltwebsites.rover;
  */
 public class Rover {
 
-    private Point position;
+    private Position position;
 
     private Direction direction;
 
@@ -30,8 +30,8 @@ public class Rover {
      * @throws IllegalArgumentException
      *             if the initialPosition is not within the bounds of the grid.
      */
-    public Rover(Point initialPosition, Direction initialDirection) {
-        if (initialPosition.getX() > Grid.width || initialPosition.getY() > Grid.height) {
+    public Rover(Position initialPosition, Direction initialDirection) {
+        if (initialPosition.getX() >= Grid.width || initialPosition.getY() >= Grid.height) {
             throw new IllegalArgumentException("Initial position would not be within grid bounds");
         }
 
@@ -89,14 +89,14 @@ public class Rover {
     }
 
     /**
-     * Returns a value equivalent to the given value mapped onto X's permitted domain by wrapping.
+     * Sets the X-position of the rover, implementing any necessary wrapping adjustments.
      */
-    private int normaliseForGridXWrapping(int xValue) {
-        return mapValueOntoRange(xValue, Grid.width);
+    private void setXPosition(int xValue) {
+        position.setX(mapValueOntoRange(xValue, Grid.width));
     }
 
     /**
-     * Returns a value equivalent to the given value mapped onto Y's permitted range
+     * Sets the Y-position of the rover, implementing any necessary changes to the rover due to Y-axis wrapping.
      */
     private void setYPosition(int yValue) {
         if (yValue == -1 || yValue == Grid.height) {
@@ -111,18 +111,18 @@ public class Rover {
      * on the opposite X-longitude.
      */
     private void adjustRoverForYWrapping() {
-        position.setX(normaliseForGridXWrapping(position.getX() + Grid.width / 2));
+        setXPosition(position.getX() + Grid.width / 2);
         direction = Direction.fromOrder(
                 mapValueOntoRange(direction.getOrder() + Direction.values().length / 2, Direction.values().length));
     }
 
     private void moveForward() {
-        position.setX(normaliseForGridXWrapping(position.getX() + direction.getXIncreaseOfForwardMovement()));
+        setXPosition(position.getX() + direction.getXIncreaseOfForwardMovement());
         setYPosition(position.getY() + direction.getYIncreaseOfForwardMovement());
     }
 
     private void moveBackward() {
-        position.setX(normaliseForGridXWrapping(position.getX() - direction.getXIncreaseOfForwardMovement()));
+        setXPosition(position.getX() - direction.getXIncreaseOfForwardMovement());
         setYPosition(position.getY() - direction.getYIncreaseOfForwardMovement());
     }
 
@@ -138,7 +138,7 @@ public class Rover {
         return direction;
     }
 
-    public Point getPosition() {
+    public Position getPosition() {
         return position;
     }
 }

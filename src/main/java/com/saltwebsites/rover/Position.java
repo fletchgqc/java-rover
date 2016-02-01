@@ -1,14 +1,14 @@
 package com.saltwebsites.rover;
 
 /**
- * An intersection of X and Y lines on a grid.
+ * A position held by an object an the intersection of X and Y lines on a grid.
  */
-public class Point {
+public class Position {
 
     private int x;
     private int y;
 
-    public Point(int x, int y) {
+    public Position(int x, int y) {
         this.x = x;
         this.y = y;
     }

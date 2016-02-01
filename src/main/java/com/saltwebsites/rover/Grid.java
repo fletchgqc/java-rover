@@ -10,11 +10,11 @@ public class Grid {
      */
     public static final int width = 250;
 
-    // These numbers were chosen for the amusement of the person who gave me this task
+    // Width and height values were chosen for the entertainment of the person who gave me this task
     public static final int height = 254;
 
     /**
-     * Inhibit instantiation of this class.
+     * Prevent instantiation of this class.
      */
     private Grid() {
     }
